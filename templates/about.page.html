@@ -1,0 +1,25 @@
+{{template "base" .}}
+
+
+    {{define "content"}}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>This is about page</h1>
+                <p>ini adalah page berkaitan dengan about saya</p>
+
+                <p>
+                    {{index .StringMap "test"}}
+                    </P>
+    
+                     <p>
+                        {{if ne (index .StringMap "remote_ip") ""}}
+                             Your Ip Adress mu {{index .StringMap "remote_ip"}}
+                        {{else}}
+                            no session, please <a href="/">click</a>ini untuk IP anda
+                        {{end}}
+                    </p>
+            </div>
+        </div>
+    </div>
+    {{end}}
