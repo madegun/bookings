@@ -32,7 +32,7 @@ func main() {
 
 	tc, err := render.CreateTemplateChace()
 	if err != nil {
-		log.Fatal("tidak bisa load template chace")
+		log.Fatal("tidak bisa render template ke browser")
 	}
 
 	app.TemplateChace = tc

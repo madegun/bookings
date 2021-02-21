@@ -1,8 +1,6 @@
 package handlers
 
 import (
-	"fmt"
-
 	"github.com/madegun/bookings/models"
 	"github.com/madegun/bookings/pkg/config"
 	"github.com/madegun/bookings/pkg/render"
@@ -30,28 +28,52 @@ func NewHandlers(r *Repository) {
 	Repo = r
 }
 
-//About hanler page
-func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-
-	StringMap := make(map[string]string)
-	StringMap["test"] = "halo dari data map"
-
-	remoteIP := m.app.Session.GetString(r.Context(), "remote_ip")
-	StringMap["remote_ip"] = remoteIP
-
-	fmt.Println("get ipnya :", remoteIP)
-
-	render.RenderTemplate(w, "about.page.html", &models.TemplateData{
-		StringMap: StringMap,
-	})
-}
-
 //Home handler page
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 
-	remoteIP := r.RemoteAddr
-	m.app.Session.Put(r.Context(), "remote_ip", remoteIP)
-
 	render.RenderTemplate(w, "home.page.html", &models.TemplateData{})
 
+}
+
+//About hanler page
+func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
+
+	render.RenderTemplate(w, "about.page.html", &models.TemplateData{})
+
+}
+
+//Reservation hanler page
+func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+
+	render.RenderTemplate(w, "make-reservation.page.html", &models.TemplateData{})
+}
+
+//Availability hanler page
+func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
+
+	render.RenderTemplate(w, "search-availability.page.html", &models.TemplateData{})
+}
+
+//PostAvailability hanler page
+func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
+
+	render.RenderTemplate(w, "search-availability.page.html", &models.TemplateData{})
+}
+
+//General hanler page
+func (m *Repository) General(w http.ResponseWriter, r *http.Request) {
+
+	render.RenderTemplate(w, "general.page.html", &models.TemplateData{})
+}
+
+//Major hanler page
+func (m *Repository) Major(w http.ResponseWriter, r *http.Request) {
+
+	render.RenderTemplate(w, "major.page.html", &models.TemplateData{})
+}
+
+//Contact hanler page
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+
+	render.RenderTemplate(w, "contact.page.html", &models.TemplateData{})
 }

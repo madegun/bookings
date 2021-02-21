@@ -1,0 +1,65 @@
+{{template "base" .}}
+
+    {{define "content"}}
+
+    <div class="container"> 
+
+        <div class="row">
+            <div class="col">
+                <img src="static/images/generals-quarters.png" alt="generals-quarters" class="img-fluid img-thumbnail mx-auto d-block room-img">
+            </div>
+        </div>
+
+      <div class="row">
+          <div class="col">
+              <h1 class="text-center mt-3" >General's Quarter</h1>
+              <p>
+                Dengan pemandangan kolam renang, Adiwana Bee House terletak di Ubud dan memiliki restoran, resepsionis 24 jam, bar, taman, kolam renang outdoor sepanjang tahun, serta teras. Semuanya saya suka dimulai dr keramahan staff nya, kebersihan area villa dan juga kamar, makanannya enak dan tempatnya sangat nyaman di pinggir sawah
+              </p>
+          </div>              
+      </div>
+
+      <div class="row">
+          <div class="col text-center">
+            
+            <a id="check-availability-btn" class="btn btn-success" href="#!">Booking Now</a>
+          </div>
+      </div>    
+
+  </div>
+
+   
+    {{end}}
+
+    {{define "js"}}
+    <script>
+    document.getElementById("check-availability-btn").addEventListener("click", function(){
+       let html = `
+         <form id="cek-avaibility-form" action="" method="POST" validate class="need-validation">
+           <div class="form-row">
+             <div class="col">
+               <div class="form-row" id="reservation-date-modal">
+                  <div class="col">
+                   <div class="mb-3">
+                     <input disabled required class="form-control" type="text" name="start" id="start" placeholder="arrival">
+                   </div>
+                   </div>
+       
+                   <div class="mb-3">
+                   <div class="col">
+                     <input disabled required class="form-control" type="text" name="end" id="end" placeholder="departure">
+                   </div>
+                 </div>
+       
+                 </div>
+               </div>  
+             </div>      
+         </form>    
+       `
+       attention.formModal({msg:html, title:"Choose Your Date"});
+       }) 
+   
+   </script>
+   
+    {{end}}
+   

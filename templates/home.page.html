@@ -1,17 +1,58 @@
 {{template "base" .}}
 
     {{define "content"}}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>This is Home Page</h1>
-                <p>page ini adalah default dari website ini</p>
-                <p>page ini adalah default dari website ini</p>
-                <p>page ini adalah default dari website ini</p>             
-                
-
+     <!-- carousel -->
+     <div id="main-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#main-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#main-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#main-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+        <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+            <img src="/static/images/woman-laptop.png" class="d-block w-100" alt="woman-laptop">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
+             </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="10000">
+            <img src="/static/images/tray.png" class="d-block w-100" alt="tray">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
+             </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="10000">
+            <img src="/static/images/outside.png" class="d-block w-100" alt="outside">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
             </div>
         </div>
+        </div>
     </div>
+    <!-- end carousel -->
+
+  <div class="container"> 
+
+      <div class="row">
+          <div class="col">
+              <h1 class="text-center mt-3" >Welcome Adiwana Bee House </h1>
+              <p>
+                Dengan pemandangan kolam renang, Adiwana Bee House terletak di Ubud dan memiliki restoran, resepsionis 24 jam, bar, taman, kolam renang outdoor sepanjang tahun, serta teras. Semuanya saya suka dimulai dr keramahan staff nya, kebersihan area villa dan juga kamar, makanannya enak dan tempatnya sangat nyaman di pinggir sawah
+              </p>
+          </div>              
+      </div>
+
+      <div class="row">
+          <div class="col text-center">
+            
+            <a class="btn btn-success" href="/make-reservation">Make Reservation Now</a>
+          </div>
+      </div>    
+
+  </div>
+
     {{end}}
 
