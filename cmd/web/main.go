@@ -43,7 +43,7 @@ func main() {
 
 	render.NewTemplate(&app)
 
-	fmt.Println(fmt.Sprintf("server running di %s", port))
+	fmt.Println(fmt.Sprintf("server running port %s", port))
 
 	serv := &http.Server{
 		Addr:    port,

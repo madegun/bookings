@@ -9,17 +9,20 @@
                 <h1 class="text-center mt-3" >Reservation Page</h1>
 
                 <form action="/search-availability" method="POST" class="needs-validation" novalidate>
+
+                  <input type="hidden" name="csrf_token" value="{{.CRSFToken}}">
+
                   <div class="row g-3" id="reservation-date">
                       <div class="col" >
                           <div class="mb-3">
                               <label for="start-date" class="form-label">Arrival</label>
                              
                               <input  required class="form-control" type="text" name="start" id="validationCustom05 start-date" placeholder="start date">
-                              <div class="valid-feedback">
+                              <!-- <div class="valid-feedback">
                                 Looks good!
-                              </div>
+                              </div> -->
                               <div class="invalid-feedback">
-                                Please select start date!
+                                Please select arrival date!
                               </div>
                              
                             </div>
@@ -29,11 +32,11 @@
                           <div class="mb-3">
                               <label for="end-date" class="form-label">Departure</label>
                               <input  required class="form-control" type="text" name="end" id="validationCustom05 end-date" placeholder="end date">
-                              <div class="valid-feedback">
+                              <!-- <div class="valid-feedback">
                                 Looks good!
-                              </div>
+                              </div> -->
                               <div class="invalid-feedback">
-                                Please select end date!
+                                Please select departure date!
                               </div>
                             </div>
                       </div>

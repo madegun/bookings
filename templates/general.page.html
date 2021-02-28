@@ -56,7 +56,40 @@
              </div>      
          </form>    
        `
-       attention.formModal({msg:html, title:"Choose Your Date"});
+       attention.formModal({
+         msg:html, 
+         title:"Choose Your Date",
+
+        willOpen: ()=>{
+          const elem = document.getElementById('reservation-date-modal');
+          const rp = new DateRangePicker(elem,{
+            format: "dd-mm-yyyy",
+            showOnFocus:true,
+        })
+        },
+
+        didOpen: ()=>{
+          document.getElementById('start').removeAttribute('disabled');
+          document.getElementById('end').removeAttribute('disabled');
+        },
+
+         callback: function(result){
+           console.log("called dipanggil");
+
+           let form = document.getElementById("cek-avaibility-form");
+           let formData = new FormData(form);
+           formData.append("csrf_token", "{{ .CRSFToken}}");
+
+           fetch('/search-availability-json',{
+             method: "POST",
+             body: formData,
+           })
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+            })
+         }
+        });
        }) 
    
    </script>

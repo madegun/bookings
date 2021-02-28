@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"path/filepath"
 
+	"github.com/justinas/nosurf"
 	"github.com/madegun/bookings/models"
 	"github.com/madegun/bookings/pkg/config"
 )
@@ -16,7 +17,10 @@ var functions = template.FuncMap{}
 
 var app *config.AppConfig
 
-func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+//AddDefaultData handler for model data
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.CRSFToken = nosurf.Token(r)
+
 	return td
 }
 
@@ -26,7 +30,7 @@ func NewTemplate(a *config.AppConfig) {
 }
 
 //RenderTemplate using html/template
-func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, html string, td *models.TemplateData) {
 
 	var tc map[string]*template.Template
 
@@ -43,7 +47,7 @@ func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData)
 
 	buf := new(bytes.Buffer)
 
-	td = AddDefaultData(td)
+	td = AddDefaultData(td, r)
 	_ = t.Execute(buf, td)
 
 	_, err := buf.WriteTo(w)
