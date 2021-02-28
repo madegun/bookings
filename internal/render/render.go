@@ -9,27 +9,30 @@ import (
 	"path/filepath"
 
 	"github.com/justinas/nosurf"
+	"github.com/madegun/bookings/internal/config"
 	"github.com/madegun/bookings/models"
-	"github.com/madegun/bookings/pkg/config"
 )
 
 var functions = template.FuncMap{}
 
 var app *config.AppConfig
 
-//AddDefaultData handler for model data
-func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
-	td.CRSFToken = nosurf.Token(r)
-
-	return td
-}
-
 //NewTemplate set the config for the template package
 func NewTemplate(a *config.AppConfig) {
 	app = a
 }
 
-//RenderTemplate using html/template
+//AddDefaultData handler for model data
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.CSRFToken = nosurf.Token(r)
+	td.Flash = app.Session.PopString(r.Context(), "flash")
+	td.Error = app.Session.PopString(r.Context(), "error")
+	td.Warning = app.Session.PopString(r.Context(), "warning")
+
+	return td
+}
+
+//RenderTemplate using html template
 func RenderTemplate(w http.ResponseWriter, r *http.Request, html string, td *models.TemplateData) {
 
 	var tc map[string]*template.Template
@@ -43,6 +46,7 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, html string, td *mod
 	t, ok := tc[html]
 	if !ok {
 		log.Fatal("tidak bisa dapat template dari templates chace")
+
 	}
 
 	buf := new(bytes.Buffer)
@@ -57,7 +61,7 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, html string, td *mod
 
 }
 
-//CreateTemplateChace
+//CreateTemplateChace func
 func CreateTemplateChace() (map[string]*template.Template, error) {
 
 	myChace := map[string]*template.Template{}

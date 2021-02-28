@@ -129,20 +129,32 @@ Array.prototype.slice.call(forms)
  
 
 function notify(msg, typeMsg){
-notie.alert({
-  type: typeMsg,
-  text: msg,            
-})
+  notie.alert({
+    type: typeMsg,
+    text: msg,            
+  })
 }
 
 function notifyModal(title, text, icon, confirmButtonText){
-Swal.fire({
-  title: title,
-  html:text,
-  icon: icon,
-  confirmButtonText: confirmButtonText
-})         
+  Swal.fire({
+    title: title,
+    html:text,
+    icon: icon,
+    confirmButtonText: confirmButtonText
+  })         
 }
+
+{{ with .Error}}
+  notify("{{.}}", "error")
+{{end}}
+
+{{ with .Flash}}
+  notify("{{.}}", "success")
+{{end}}
+
+{{with .Warning}}
+  notify("{{.}}", "warning")
+{{end}}
   
 
 function Prompt(){
@@ -179,42 +191,42 @@ const{
   footer = "",
 }= c;
 
-Swal.fire({
-icon: 'success',
-title: title,
-text: msg,
-footer: footer,
-})
+  Swal.fire({
+  icon: 'success',
+  title: title,
+  text: msg,
+  footer: footer,
+  })
 }
 
-let error = function(c){
-const{
-  msg = "",
-  title = "",     
-  footer = "",
-}= c;
+  let error = function(c){
+    const{
+      msg = "",
+      title = "",     
+      footer = "",
+    }= c;
 
-Swal.fire({
-icon: 'error',
-title: title,
-text: msg,
-footer: footer,
-})
-}
-return {
-  toast: toast,
-  success: success,
-  error: error,
-  formModal: formModal,
-}
+    Swal.fire({
+    icon: 'error',
+    title: title,
+    text: msg,
+    footer: footer,
+    })
+  }
+    return {
+      toast: toast,
+      success: success,
+      error: error,
+      formModal: formModal,
+    }
 }  
-
 
 async function formModal(c){
 const{
 msg = "",
 title = "",
 } = c;
+
 
 const { value: result } = await Swal.fire({
 title: title,

@@ -1,14 +1,16 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
 	"time"
 
-	"github.com/madegun/bookings/pkg/config"
-	"github.com/madegun/bookings/pkg/handlers"
-	"github.com/madegun/bookings/pkg/render"
+	"github.com/madegun/bookings/internal/config"
+	"github.com/madegun/bookings/internal/handlers"
+	"github.com/madegun/bookings/internal/render"
+	"github.com/madegun/bookings/models"
 
 	"github.com/alexedwards/scs/v2"
 )
@@ -20,8 +22,13 @@ var session *scs.SessionManager
 
 func main() {
 
+	//apa yg akan disimpan di session
+	gob.Register(models.Reservation{})
+
+	//true/false production mode
 	app.InProduction = false
 
+	//variable new session dan settingannya menggunakan middleware scs
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
 	session.Cookie.Persist = true
